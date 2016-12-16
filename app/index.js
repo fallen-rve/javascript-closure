@@ -1,5 +1,6 @@
 "use strict";
-const _ = require('./modules/getID');
+const _ = require('./modules/getByID');
+const __ = require('./modules/getByClass');
 
 var manageTickets = (function IIFE(){
     let tickets = [];
@@ -55,3 +56,5 @@ console.log(manageTickets.getAllTickets());
 manageTickets.clearTickets();
 console.log("Cleared Tickets:");
 console.log(manageTickets.getAllTickets());
+
+console.log(__("classes"));
