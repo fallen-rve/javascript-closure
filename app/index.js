@@ -1,6 +1,5 @@
 "use strict";
-const _ = require('./modules/getByID');
-const __ = require('./modules/getByClass');
+import {_, __} from './bootstrap';
 
 var manageTickets = (function IIFE(){
     let tickets = [];
@@ -9,6 +8,7 @@ var manageTickets = (function IIFE(){
         removeTicket: removeTicket,
         getAllTickets: getAllTickets,
         clearTickets: clearTickets,
+        ticketCount: ticketCount,
         primaryTicket: ""
     };
 
@@ -34,6 +34,10 @@ var manageTickets = (function IIFE(){
         tickets.splice(0, tickets.length);
     }
 
+    function ticketCount() {
+        return tickets.length;
+    }
+
     return publicAPI;
 })();
 
@@ -41,6 +45,7 @@ var manageTickets = (function IIFE(){
 manageTickets.addTicket("thing");
 manageTickets.addTicket("stuff");
 
+console.log(`Ticket Count: ${manageTickets.ticketCount()}`);
 _("app").innerHTML =
     "<ul>" +
         manageTickets.getAllTickets().map(function list(c, i) {
