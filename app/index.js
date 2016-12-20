@@ -1,65 +1,27 @@
-"use strict";
-import {_, __} from './bootstrap';
+require('./bootstrap');
+import manageTickets from './modules/manageTickets';
+(function IIFE() {
+    'use strict';
 
-var manageTickets = (function IIFE(){
-    let tickets = [];
-    var publicAPI = {
-        addTicket: addTicket,
-        removeTicket: removeTicket,
-        getAllTickets: getAllTickets,
-        clearTickets: clearTickets,
-        ticketCount: ticketCount,
-        primaryTicket: ""
-    };
+    manageTickets.addTicket("thing");
+    manageTickets.addTicket("stuff");
 
-    function addTicket(ticket) {
-        if (tickets.length === 0) {
-            publicAPI.primaryTicket = ticket;
-        }
-        tickets.push(ticket);
-    }
+    console.log(`Ticket Count: ${manageTickets.ticketCount()}`);
+    get.byId("app").innerHTML =
+        "<ul>" +
+            manageTickets.getAllTickets().map(function list(c, i) {
+                return `<li key=${i}>${c}</li>`;
+            }).join("") +
+        "</ul>";
 
-    function removeTicket(ticket) {
-        let index = tickets.indexOf(ticket);
-        if (index > -1) {
-            tickets.splice(index, 1);
-        }
-    }
+    console.log(`Primary Ticket: ${manageTickets.primaryTicket}`);
 
-    function getAllTickets() {
-        return tickets;
-    }
+    console.log("All Tickets:");
+    console.log(manageTickets.getAllTickets());
 
-    function clearTickets() {
-        tickets.splice(0, tickets.length);
-    }
+    manageTickets.clearTickets();
+    console.log("Cleared Tickets:");
+    console.log(manageTickets.getAllTickets());
 
-    function ticketCount() {
-        return tickets.length;
-    }
-
-    return publicAPI;
-})();
-
-
-manageTickets.addTicket("thing");
-manageTickets.addTicket("stuff");
-
-console.log(`Ticket Count: ${manageTickets.ticketCount()}`);
-_("app").innerHTML =
-    "<ul>" +
-        manageTickets.getAllTickets().map(function list(c, i) {
-            return `<li key=${i}>${c}</li>`;
-        }).join("") +
-    "</ul>";
-
-console.log(`Primary Ticket: ${manageTickets.primaryTicket}`);
-
-console.log("All Tickets:");
-console.log(manageTickets.getAllTickets());
-
-manageTickets.clearTickets();
-console.log("Cleared Tickets:");
-console.log(manageTickets.getAllTickets());
-
-console.log(__("classes"));
+    console.log(get.bySelector(".classes"));
+}());

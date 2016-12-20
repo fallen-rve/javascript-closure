@@ -1,5 +1,1 @@
-
-module.exports = {
-    _ : require("./modules/getByID"),
-    __ : require("./modules/getByClass")
-};
+window.get = require("./modules/get");
