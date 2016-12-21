@@ -12,7 +12,6 @@ import manageTickets from './modules/manageTickets';
             "</ul>";
     }
 
-
     manageTickets.addTicket("thing");
     manageTickets.addTicket("stuff");
     updateTicketList();
